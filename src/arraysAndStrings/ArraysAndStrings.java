@@ -1,6 +1,6 @@
 package arraysAndStrings;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ArraysAndStrings {
 	
@@ -39,6 +39,60 @@ public class ArraysAndStrings {
 			return true;
 		}
 		return false;
+	}
+	
+	public static String urlify(String input, int trueLength) {
+		char[] output = input.toCharArray();
+		int spaceCount = 0;
+		int spacesSeen = 0;
+		int trueEnd = trueLength - 1;
+		for (int i = 0; i < trueLength; i++) {
+			if (output[i] == ' ') {
+				spaceCount++;
+			}
+		}
+		for (int i = trueLength - 1; i >= 0; i--) {
+			if (output[i] == ' ') {
+				for (int k = trueEnd; k > i; k--) {
+					output[k+2] = output[k];
+				}
+				trueEnd += 2;
+				output[i] = '%';
+				output[i + 1] = '2';
+				output[i + 2] = '0';
+				spacesSeen++;
+				if (spacesSeen == spaceCount) {
+					String outputStr = new String(output);
+					return outputStr;
+				}
+			}
+		}
+		
+		return "An Error Occurred";
+	}
+	
+	public static boolean isPermutationOfPalindrome(String s) {
+		char[] arr = s.toLowerCase().toCharArray();
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+		boolean hasSeenOdd = false;
+		for (int i = 0; i < arr.length; i++) {
+			if (map.get(arr[i]) == null) {
+				map.put(arr[i], 1);
+				continue;
+			}
+			int value = map.get(arr[i]) + 1;
+			map.put(arr[i], value);
+		}
+		
+		for (int val : map.values()) {
+			if (val % 2 == 1 ) {
+				if (hasSeenOdd == true) {
+					return false;
+				}
+				hasSeenOdd = true;
+			}
+		}
+		return true;
 	}
 
 }
