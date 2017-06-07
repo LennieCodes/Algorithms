@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ArraysAndStrings {
 	
-	
+	// 1.1
 	public static boolean isUnique(String value) {
 		if (value.length() == 0 || value.length() == 1) {
 			return true;
@@ -26,7 +26,7 @@ public class ArraysAndStrings {
 		return true;
 		
 	}
-	
+	// 1.2
 	public static boolean isPermutation(String one, String two) {
 		if (one.length() != two.length()){
 			return false;
@@ -40,7 +40,7 @@ public class ArraysAndStrings {
 		}
 		return false;
 	}
-	
+	// 1.3
 	public static String urlify(String input, int trueLength) {
 		char[] output = input.toCharArray();
 		int spaceCount = 0;
@@ -70,7 +70,7 @@ public class ArraysAndStrings {
 		
 		return "An Error Occurred";
 	}
-	
+	// 1.4
 	public static boolean isPermutationOfPalindrome(String s) {
 		char[] arr = s.toLowerCase().toCharArray();
 		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
@@ -94,5 +94,94 @@ public class ArraysAndStrings {
 		}
 		return true;
 	}
+	// 1.5
+	public static boolean isOneEditAway(String s1, String s2) throws Exception {
+		// immediately return false if length difference between strings is greater than 1.
+		if (Math.abs(s1.length() - s2.length()) > 1){
+			return false;
+		}
+		boolean editMade = false;
+		// only operation is character replacement.
+		if (s1.length() == s2.length()) {
+			for (int i = 0; i < s1.length(); i++) {
+				if (s1.charAt(i) == s2.charAt(i)) {
+					continue;
+				}
+				if (editMade == true) {
+					return false;
+				}
+				editMade = true;
+			}
+			return true;
+		}
+		// adding a character 
+		else if (s1.length() < s2.length()) {
+			int j = 0;
+			for (int i = 0; i < s2.length(); i++) {
+				if (s1.charAt(j) == s2.charAt(i)) {
+					j++;
+					continue;
+				}
+				if (editMade == true) {
+					return false;
+				}
+				editMade = true;
+			}
+			return true;
+		}
+		// removing a character
+		else if (s1.length() > s2.length()) {
+			int j = 0;
+			for (int i = 0; i < s1.length(); i++) {
+				if (s1.charAt(i) == s2.charAt(j)) {
+					j++;
+					continue;
+				}
+				if (editMade == true) {
+					return false;
+				}
+				editMade = true;
+			}
+			return true;
+		}
+		
+		throw new Exception("Something went wrong. This shouldn't happen.");
+		
+	}
 
+	// 1.6 
+	public static String compress(String s1) {
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+		StringBuilder result = new StringBuilder();
+		Integer temp; 
+		
+		for (int i = 0; i < s1.length(); i++) {
+			if ((i + 1) == s1.length() || s1.charAt(i) != s1.charAt(i + 1)) {
+				temp = map.get(s1.charAt(i));
+				result.append(s1.charAt(i));
+				
+				if (temp == null) {
+					result.append(1);
+				}
+				else {
+					result.append(map.get(s1.charAt(i)) + 1); 
+				}
+				
+				map = new HashMap<Character, Integer>();
+				continue;
+			}
+			
+			if (map.get(s1.charAt(i)) == null) {
+				map.put(s1.charAt(i), 1);
+				continue;
+			}
+			
+			temp = map.get(s1.charAt(i));
+			map.put(s1.charAt(i), temp + 1);
+			
+		}
+		
+		return s1.length() <= result.toString().length() ? s1 : result.toString();		
+		
+	}
 }
