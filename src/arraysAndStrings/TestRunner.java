@@ -103,4 +103,23 @@ public class TestRunner {
 		
 	}
 	
+	@Test
+	public void rotateMatrixTest() {
+		
+		
+		// ArraysAndStrings.rotateMatrix();
+	}
+	
+	@Test
+	public void isRotationTest() {
+		String s2 = "waterbottle";
+		String s1 = "erbottlewat";
+		
+		if (ArraysAndStrings.isRotation(s2, s1) == false) {
+			fail("String: "+ s2 + " is a rotation of String: " + s1 + " but method isRotation did not detect it");
+		}
+		
+		assertTrue(true);
+	}
+	
 }

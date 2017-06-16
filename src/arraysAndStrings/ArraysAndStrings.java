@@ -184,4 +184,118 @@ public class ArraysAndStrings {
 		return s1.length() <= result.toString().length() ? s1 : result.toString();		
 		
 	}
+
+	public static void rotateMatrix() {
+		int[][] matrix = new int[][] {
+			{1,2,3}, 
+			{4,5,6},
+			{7,8,9}
+		};
+		
+		/*
+		 * I want to rotate side by side. So
+		 * If I were just going to brute force it:
+		 * 
+		 * [row][col]
+		 * 
+		 * corners need to move first. Why? 
+		 * 
+		 * So this code rotates 1 frame, but it also overwrites that frame. 
+		 * And no matter what side you start, you will overwrite the frame. 
+		 * 
+		 * What if I want to preserve 3,6,9 and move it to the bottom frame. 
+		 * 
+		 * So what you'll have is 
+		 * 
+		 * {0,0,1}
+		 * {0,0,2} 
+		 * {9,6,3}
+		 * 
+		 * You need a snapshot of each frame before the move. 
+		 * Top, bottom, left right.
+		 * 
+		 * 
+		 * 
+		 */
+		
+		int top[] = new int[matrix.length];
+		int bottom[] = new int[matrix.length];
+		int left[] = new int[matrix.length];
+		int right[] = new int[matrix.length];
+		
+		// grab snapshot before the move.
+		for (int i = 0; i < matrix.length; i++) {
+			top[i] = matrix[0][i];
+			left[i] = matrix[i][0];
+			right[i] = matrix[i][matrix.length - 1];
+			bottom[i] = matrix[matrix.length - 1][i];
+		}
+		
+		// rotate code:
+		for (int i = 0; i < matrix.length; i++) {
+			matrix[i][matrix.length - 1] = top[i]; // right becomes top.
+			matrix[matrix.length - 1][i] = right[i]; // bottom becomes right.
+			matrix[i][0] = bottom[i]; // left becomes bottom.
+			matrix[0][i] = left[i]; // top becomes left.
+		}
+		
+		// TEST THIS! 
+		
+		/*
+		 * The above code gives us 4 frames - the snapshot before the move. 
+		 * So you have to iterate through the original matrix. 
+		 */
+		
+		int j = 2;
+		System.out.println("Before move:");
+		for (int i = 0; i < matrix.length; i++) {
+			System.out.println(matrix[i][j]);
+		}
+		
+		matrix[2][2] = matrix[0][2]; // 9 becomes 3. 
+		matrix[1][2] = matrix[0][1]; // 6 becomes 2.
+		matrix[0][2] = matrix[0][0]; // 3 becomes 1.
+		
+		System.out.println("After Move:");
+		for (int i = 0; i< matrix.length; i++) {
+			System.out.println(matrix[i][j]);
+		}
+		
+		
+//		for (int i = 0; i < matrix.length; i++) {
+//			for (int j = 0; j < matrix.length; j++) {
+//				System.out.println(matrix[i][j]);
+//			}
+//		}
+		
+		
+		
+	}
+	
+	// 1.9
+	public static boolean isRotation(String s2, String s1) {
+		if (s2.length() != s1.length()) {
+			return false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		int j = s2.length() - 1;
+		
+		for (int i = j; i >= 0; i--) {
+			if (s2.charAt(i) == s1.charAt(j)) {
+				j--;
+				continue;
+			}
+			if (j != (s2.length() - 1)) {
+				j++;
+			}
+		}
+		
+		for (int i = 0; i <= j; i++) {
+			sb.append(s1.charAt(i));
+		}
+		
+		return s2.contains(sb.toString());
+	}
+	
 }
