@@ -2,6 +2,8 @@ package arraysAndStrings;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class TestRunner {
@@ -101,13 +103,33 @@ public class TestRunner {
 			fail(s5 + " is not the result of compress call on " + s4);
 		}
 		
+		assertTrue(true);
+		
 	}
 	
 	@Test
-	public void rotateMatrixTest() {
+	public void rotateMatrixTest() throws Exception {
+		char[][] init = new char[][] {
+			{'A','B','C','D'},
+			{'E','F','G','H'},
+			{'I','J','K','L'},
+			{'M','N','O','P'}
+		};
 		
+		char[][] finalResultTest = new char[][] {
+			{'M','I','E','A'},
+			{'N','J','F','B'},
+			{'O','K','G','C'},
+			{'P','L','H','D'}
+		};
 		
-		// ArraysAndStrings.rotateMatrix();
+		char[][] result = ArraysAndStrings.rotateMatrix(init);
+		
+		if (Arrays.deepEquals(result, finalResultTest) == false) {
+			fail("rotateMatrix failed to rotate the arrays.");
+		}
+		
+		assertTrue(true);
 	}
 	
 	@Test
