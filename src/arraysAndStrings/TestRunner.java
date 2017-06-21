@@ -122,11 +122,35 @@ public class TestRunner {
 			{'O','K','G','C'},
 			{'P','L','H','D'}
 		};
-		
-		char[][] result = ArraysAndStrings.rotateMatrix(init);
-		
-		if (Arrays.deepEquals(result, finalResultTest) == false) {
+				
+		if (Arrays.deepEquals(ArraysAndStrings.rotateMatrix(init), finalResultTest) == false) {
 			fail("rotateMatrix failed to rotate the arrays.");
+		}
+		
+		assertTrue(true);
+	}
+	
+	@Test
+	public void isZeroMatrixTest() throws Exception {
+		int[][] init = new int[][] {
+			{5,0,7},
+			{8,2,4},
+			{1,2,7},
+			{8,2,0},
+			{9,8,1}
+		};
+		
+		int[][] finalResultTest = new int[][] {
+			{0,0,0},
+			{8,0,0},
+			{1,0,0},
+			{0,0,0},
+			{9,0,0}
+		};
+		
+		
+		if (Arrays.deepEquals(ArraysAndStrings.zeroMatrix(init), finalResultTest) == false) {
+			fail("Zero Matrix method failed to zero out rows and columns.");
 		}
 		
 		assertTrue(true);

@@ -26,6 +26,7 @@ public class ArraysAndStrings {
 		return true;
 		
 	}
+	
 	// 1.2
 	public static boolean isPermutation(String one, String two) {
 		if (one.length() != two.length()){
@@ -40,6 +41,7 @@ public class ArraysAndStrings {
 		}
 		return false;
 	}
+	
 	// 1.3
 	public static String urlify(String input, int trueLength) {
 		char[] output = input.toCharArray();
@@ -70,6 +72,7 @@ public class ArraysAndStrings {
 		
 		return "An Error Occurred";
 	}
+	
 	// 1.4
 	public static boolean isPermutationOfPalindrome(String s) {
 		char[] arr = s.toLowerCase().toCharArray();
@@ -94,6 +97,7 @@ public class ArraysAndStrings {
 		}
 		return true;
 	}
+	
 	// 1.5
 	public static boolean isOneEditAway(String s1, String s2) throws Exception {
 		// immediately return false if length difference between strings is greater than 1.
@@ -184,6 +188,7 @@ public class ArraysAndStrings {
 		return s1.length() <= result.toString().length() ? s1 : result.toString();		
 		
 	}
+	
 	// 1.7
 	public static char[][] rotateMatrix(char[][] matrix) throws Exception {
 		if (matrix.length == 0 || matrix[0].length != matrix.length) {
@@ -207,6 +212,38 @@ public class ArraysAndStrings {
 			}
 		}
 		
+		return matrix;
+	}
+	
+	// 1.8
+	public static int[][] zeroMatrix(int[][] matrix) throws Exception {
+		if (matrix.length == 0 || matrix.length == matrix[0].length) {
+			throw new Exception("Matrix is either length 0, or not a MxN matrix");
+		}
+		
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				if (matrix[i][j] == 0) {
+					map.put(i, j); 
+				}
+			}
+		}
+		
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			Integer row = entry.getKey();
+			Integer col = entry.getValue();
+			
+			for (int i = 0; i < matrix.length; i++) {
+				matrix[i][col] = 0;
+			}
+			
+			for (int j = 0; j < matrix[0].length; j++) {
+				matrix[row][j] = 0;
+			}	
+		}
+				
 		return matrix;
 	}
 	
