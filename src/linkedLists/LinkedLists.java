@@ -26,8 +26,31 @@ public class LinkedLists {
 	
 	// 2.2
 	public static Node FindKthToLast(Node head, int k) {
-		return head;
+		if (head == null || head.next == null) {
+			return head;
+		}
+		
+		Pair<Node, Integer> result = new LinkedLists().FindKthToLastInternal(head.next, k);
+		
+		return result.getElement0();
 	}
+	
+	private Pair<Node, Integer> FindKthToLastInternal(Node head, int k) {
+		if (head.next == null) {
+			return new Pair<Node, Integer>(head, new Integer(1));
+		}
+		
+		Pair<Node, Integer> runner = FindKthToLastInternal(head.next, k);
+		int counter = (int) runner.getElement1() + 1;
+		
+		if (counter == k) {
+			return new Pair<Node, Integer>(head, new Integer(counter));
+		}
+		
+		return new Pair<Node, Integer>(runner.getElement0(), new Integer(counter));
+	}
+	
+	
 	
 	// 2.3
 	public static void DeleteNode(Node n) {

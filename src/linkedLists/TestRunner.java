@@ -33,5 +33,26 @@ public class TestRunner {
 		}
 		
 	}
-
+	
+	@Test
+	public void FindKthToLastTest() {
+		Node head = null;
+		int[] initArr = new int[] {5, 6, 7, 8, 9};
+		int k = 3; // 3rd to last
+		
+		for (int i = 0; i < initArr.length; i++) {
+			if (head == null) {
+				head = new Node(initArr[i]);
+				continue;
+			}
+			head.appendToTail(initArr[i]);
+		}
+		
+		head = LinkedLists.FindKthToLast(head, k);
+		
+		if (head.data != initArr[k-1]) {
+			fail("Expected:" + initArr[k-1] + " But retrieved: " + head.data);
+		}
+		
+	}
 }
