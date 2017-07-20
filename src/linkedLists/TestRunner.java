@@ -1,16 +1,37 @@
 package linkedLists;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 public class TestRunner {
 
-	public static void main(String[] args) {
-		Node head = new Node(5);
-		// head.next = null.
+	@Test 
+	public void RemoveDupesTest() {
+		Node head = null;		
+		int[] initArr = new int[] {2,2,4,5,2,8,5};
+		int[] finalArr = new int[] {2,4,5,8};
 		
-		head.appendToTail(6);
-		head.appendToTail(7);
+		for (int i = 0; i < initArr.length; i++) {
+			// should only be null on 0 index
+			if (head == null) {
+				head = new Node(initArr[i]);
+				continue;
+			}
+			head.appendToTail(initArr[i]);
+		}
 		
-		// TODO Auto-generated method stub
-
+		head = LinkedLists.RemoveDupes(head);
+		
+		int index = 0;
+		while (head != null) {
+			if (head.data != finalArr[index]) {
+				fail("Linked List should be unique, but is not.");
+			}
+			
+			index++;
+			head = head.next;
+		}
+		
 	}
 
 }
