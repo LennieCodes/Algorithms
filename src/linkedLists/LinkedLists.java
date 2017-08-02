@@ -54,11 +54,65 @@ public class LinkedLists {
 	
 	// 2.3
 	public static void DeleteNode(Node n) {
+		if (n == null || n.next == null) {
+			return;
+		}
 		
+		while (n != null) {
+			n.data = n.next.data;
+			
+			if (n.next.next == null) {
+				n.next = null;
+			}
+			
+			n = n.next;
+		}
 	}
 	
 	// 2.4
-	public static Node Partition(Node head) {
+	public static Node Partition(Node head, int pivot) {
+		if (head == null || head.next == null) {
+			throw new NullPointerException("head is null");
+		}
+		
+		Node partA = null;
+		Node partB = null;
+		Node runner = head;
+		
+		while (runner != null) {
+			if (runner.data < pivot) {
+				if (partA != null) {
+					partA.appendToTail(runner.data);
+				}
+				else {
+					partA = new Node(runner.data);
+				}
+			}
+			else {
+				if (partB != null) {
+					partB.appendToTail(runner.data);
+				}
+				else {
+					partB = new Node(runner.data);
+				}
+			}
+			runner = runner.next;
+		}
+		
+		runner = head;
+		
+		while (partA != null) {
+			runner.data = partA.data;
+			runner = runner.next;
+			partA = partA.next;
+		}
+		
+		while (partB != null) {
+			runner.data = partB.data;
+			runner = runner.next;
+			partB = partB.next;
+		}
+		
 		return head;
 	}
 
