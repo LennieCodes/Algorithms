@@ -122,4 +122,63 @@ public class TestRunner {
 		}
 		
 	}
+	
+	@Test
+	public void SumListsTest() {
+		int[] ll1 = new int[] {1, 5, 9};
+		int[] ll2 = new int[] {2, 3, 6, 7};
+		int[] sumArr = new int[] {3, 8, 5, 8};
+		
+		Node head1 = new Node(ll1[0]);
+		Node head2 = new Node(ll2[0]);
+		
+		for (int i = 1; i < ll1.length; i++) {
+			head1.appendToTail(ll1[i]);
+		}
+		
+		for (int i = 1; i < ll2.length; i++) {
+			head2.appendToTail(ll2[i]);
+		}
+		
+		Node sum = LinkedLists.SumLists(head1, head2);
+		
+		int index = 0;
+		while (sum != null) {
+			if (sum.data != sumArr[index]) {
+				fail("Expected:" + sumArr[index] + " but list contains:" + sum.data);
+			}
+			sum = sum.next;
+			index++;
+		}
+		
+	}
+	
+	@Test
+	public void SumListsReverseTest() {
+		int[] ll1 = new int[] {0, 9, 5, 1}; //pre-padded with 0s. 
+		int[] ll2 = new int[] {7, 6, 3, 2};
+		int[] sumArr = new int[] {8, 5, 8, 3};
+		
+		Node head1 = new Node(ll1[0]);
+		Node head2 = new Node(ll2[0]);
+		
+		for (int i = 1; i < ll1.length; i++) {
+			head1.appendToTail(ll1[i]);
+		}
+		
+		for (int i = 1; i < ll2.length; i++) {
+			head2.appendToTail(ll2[i]);
+		}
+		
+		Node sum = LinkedLists.SumListsReverse(head1, head2);
+		
+		int index = 0;
+		while (sum != null) {
+			if (sum.data != sumArr[index]) {
+				fail("Expected:" + sumArr[index] + " but list contains:" + sum.data);
+			}
+			sum = sum.next;
+			index++;
+		}
+	}
 }

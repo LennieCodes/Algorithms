@@ -17,4 +17,14 @@ public class Node {
 		}
 		n.next = end;
 	}
+	
+	public Node appendToHead(int d) {
+		Node head = new Node(d);
+		Node n = this;
+		
+		head.next = n;
+		
+		return head;
+		
+	}
 }
