@@ -181,4 +181,26 @@ public class TestRunner {
 			index++;
 		}
 	}
+	
+	@Test
+	public void IsPalindromeTest() {
+		int[] arr = new int[] {0,1,2,1,0};
+		int[] arr2 = new int[] {1,2,3,4,5};
+		
+		Node head1 = new Node(arr[0]);
+		Node head2 = new Node(arr2[0]);
+		
+		for (int i = 1; i < arr.length; i++) {
+			head1.appendToTail(arr[i]);
+			head2.appendToTail(arr2[i]);
+		}
+		
+		if (LinkedLists.IsPalindrome(head1) != true) {
+			fail("List 1 passed into IsPalindrome is a palindrome, but method does not detect it.");	
+		}
+		
+		if (LinkedLists.IsPalindrome(head2) == true) {
+			fail("List 2 passed into IsPalindrome is not a palindrome, but method does not detect it");
+		}
+	}
 }

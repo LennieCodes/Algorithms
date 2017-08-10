@@ -209,5 +209,43 @@ public class LinkedLists {
 		return new Pair<Node, Integer>(sum, new Integer(carry));
 		
 	}
+	
+	// 2.6
+	public static boolean IsPalindrome(Node head) {
+		if (head == null || head.next == null) {
+			throw new NullPointerException("List passed into IsPalindrome is null or has only 1 value");
+		}
+		
+		Node reverse = new LinkedLists().ReverseAndClone(head);
+		return new LinkedLists().AreListsEqual(head, reverse);
+	}
+	
+	private Node ReverseAndClone(Node head) {
+		Node reverse = new Node(head.data);
+		head = head.next;
+		
+		while (head != null) {
+			reverse = reverse.appendToHead(head.data);
+			head = head.next;
+		}
+		
+		return reverse;
+	}
+	
+	private boolean AreListsEqual(Node head1, Node head2) {
+		if (head1 == null || head2 == null) {
+			throw new NullPointerException("One of the parameters passed into method is null");
+		}
+		
+		while (head1 != null && head2 != null) {
+			if (head1.data != head2.data) {
+				return false;
+			}
+			head1 = head1.next;
+			head2 = head2.next;
+		}
+		
+		return head1 == null && head2 == null;
+	}
 
 }
