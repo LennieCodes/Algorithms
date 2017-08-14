@@ -203,4 +203,63 @@ public class TestRunner {
 			fail("List 2 passed into IsPalindrome is not a palindrome, but method does not detect it");
 		}
 	}
+	
+	@Test
+	public void IntersectionTest() {
+		int[] arr = new int[] {0,1,9,2};
+		int[] arr2 = new int[] {2,8,1};
+		int[] tailArr = new int[] {7,8,2,1};
+		
+		Node head1 = new Node(arr[0]);
+		Node head2 = new Node(arr2[0]);
+		Node tail = new Node(tailArr[0]);
+		
+		Node runner1 = head1;
+		Node runner2 = head2;
+		
+		for (int i = 1; i < arr.length; i++) {
+			head1.appendToTail(arr[i]);
+			runner1 = runner1.next;
+		}
+		
+		for (int i = 1; i < arr2.length; i++) {
+			head2.appendToTail(arr2[i]);
+			runner2 = runner2.next;
+		}
+		
+		for (int i = 1; i < tailArr.length; i++) {
+			tail.appendToTail(tailArr[i]);
+		}
+		
+		// setup the intersection
+		runner1.next = tail;
+		runner2.next = tail;
+		
+		Node result = LinkedLists.Intersection(head1, head2);
+		
+		// test 1 - when an intersection exists.
+		if (result != tail) {
+			fail("Node returned from Intersection call is not the intersecting node.");
+		}
+		
+		// test 2 - when an intersection does not exist. 
+		head1 = new Node(arr[0]);
+		head2 = new Node(arr2[0]);
+		
+		for (int i = 1; i < arr.length; i++) {
+			head1.appendToTail(arr[i]);
+		}
+		
+		for (int i = 1; i < arr2.length; i++) {
+			head2.appendToTail(arr[i]);
+		}
+		
+		result = LinkedLists.Intersection(head1, head2);
+		
+		if (result != null) {
+			fail("Expected no intersection to be found - but method did not detect it");
+		}
+		
+		
+	}
 }

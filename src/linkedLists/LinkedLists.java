@@ -247,5 +247,59 @@ public class LinkedLists {
 		
 		return head1 == null && head2 == null;
 	}
-
+	
+	//2.7
+	public static Node Intersection(Node head1, Node head2) {
+		if (head1 == null || head2 == null) {
+			throw new NullPointerException("One or more of the parameters passed into method is null");
+		}
+		
+		Pair<Node, Integer> tailAndSize1 = new LinkedLists().GetTailAndSize(head1);
+		Pair<Node, Integer> tailAndSize2 = new LinkedLists().GetTailAndSize(head2);
+		
+		if (tailAndSize1.getElement0() != tailAndSize2.getElement0()) {
+			return null;
+		}
+		
+		Node shorter = tailAndSize1.getElement1() < tailAndSize2.getElement1() ? head1 : head2;
+		Node longer = tailAndSize1.getElement1() < tailAndSize2.getElement1() ? head2 : head1;
+		
+		longer = new LinkedLists().GetKthNode(longer, Math.abs(tailAndSize1.getElement1() - tailAndSize2.getElement1()));
+		
+		while (shorter != longer) {
+			shorter = shorter.next;
+			longer = longer.next;
+		}
+		
+		return shorter;
+		
+	}
+	
+	private Pair<Node, Integer> GetTailAndSize(Node head) {
+		if (head == null ) {
+			throw new NullPointerException("Parameter passed into method is null");
+		}
+		int size = 1;
+		while (head.next != null) {
+			head = head.next;
+			size++;
+		}
+				
+		return new Pair<Node, Integer>(head, size);
+	}
+	
+	private Node GetKthNode(Node head, int k) {
+		if (head == null) {
+			throw new NullPointerException("Parameter passed into method is null");
+		}
+		int index = 0;
+		
+		while (index != k) {
+			head = head.next;
+			index++;
+		}
+		
+		return head;
+	}
+	
 }
