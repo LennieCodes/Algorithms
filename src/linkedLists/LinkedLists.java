@@ -1,5 +1,7 @@
 package linkedLists;
 
+import java.util.*;
+
 public class LinkedLists {
 	
 	// 2.1
@@ -302,4 +304,23 @@ public class LinkedLists {
 		return head;
 	}
 	
+	//2.8
+	public static Node DetectLoopAndReturn(Node head) {
+		if (head == null || head.next == null) {
+			throw new NullPointerException("Parameter passed into method is null or has only one element");
+		}
+		
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		Node temp;
+		while (head != null) {
+			temp = map.get(head);
+			if (temp != null) {
+				return temp;
+			}
+			map.put(head, head);
+			head = head.next;
+		}
+		
+		return null;
+	}
 }

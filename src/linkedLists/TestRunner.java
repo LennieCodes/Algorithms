@@ -262,4 +262,39 @@ public class TestRunner {
 		
 		
 	}
+	
+	@Test
+	public void LoopDetectionTest() {
+		int[] arr = new int[] {1,2,3,4,5};
+		Node head = new Node(arr[0]);
+		Node runner = head;
+		Node prev = new Node(5);
+		
+		for (int i = 1; i < arr.length; i++) {
+			head.appendToTail(arr[i]);
+		}
+		
+		int index = 0;
+		while (runner.next != null) {
+			runner = runner.next;
+			index++;
+			if (index == 2) {
+				prev = runner;
+			}
+		}
+		
+		runner.next = prev;
+		
+		Node result = LinkedLists.DetectLoopAndReturn(head);
+		
+		if (result == null) {
+			fail("List has a loop, but method did not detect it");
+		}
+	
+		else if (result != prev) {
+			fail("Expected node:" + prev.toString() + " but method returned:" + result.toString());
+		}
+			
+	}
+
 }
