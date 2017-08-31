@@ -11,16 +11,16 @@ public class MultiStack {
 		topIndex2, topIndex3, length1, length2, length3, arrayCapacity;
 	
 		public StackInfo(int size) {
-			stackInfo.capacity = size / 3;			
-			stackInfo.arrayCapacity = size;
+			this.capacity = size / 3;			
+			this.arrayCapacity = size;
 			
-			stackInfo.topIndex1 = -1;
-			stackInfo.topIndex2 = (size / 3) - 1;
-			stackInfo.topIndex3 = ((size / 3) * 2) - 1;
+			this.topIndex1 = -1;
+			this.topIndex2 = (size / 3) - 1;
+			this.topIndex3 = ((size / 3) * 2) - 1;
 			
-			stackInfo.length1 = 0;
-			stackInfo.length2 = 0;
-			stackInfo.length3 = 0;
+			this.length1 = 0;
+			this.length2 = 0;
+			this.length3 = 0;
 		}
 		
 	}
@@ -45,7 +45,7 @@ public class MultiStack {
 				break;
 			case 2:
 				if (stackInfo.length2 == stackInfo.capacity) {
-					// double stack size and copy
+					stackArray = DoubleArrayAndCopy();
 				}
 				stackInfo.topIndex2 = stackInfo.topIndex2 + 1;
 				stackArray[stackInfo.topIndex2] = value;
@@ -53,7 +53,7 @@ public class MultiStack {
 				break;
 			case 3:
 				if (stackInfo.length3 == stackInfo.capacity) {
-					// double stack size and copy
+					stackArray = DoubleArrayAndCopy();
 				}
 				stackInfo.topIndex3 = stackInfo.topIndex3 + 1;
 				stackArray[stackInfo.topIndex3] = value;
@@ -113,6 +113,10 @@ public class MultiStack {
 		throw new UnsupportedOperationException("Operation passed into Peek is not supported");
 	}
 	
+	public int[] GetInternalArray() {
+		return stackArray;
+	}
+	
 	public boolean IsEmpty(int stackNum) {
 		switch (stackNum) {
 			case 1:
@@ -162,10 +166,9 @@ public class MultiStack {
 	private void Reinitialize(int size) {
 		stackInfo.capacity = size / 3;			
 		stackInfo.arrayCapacity = size;
-		// ERROR HERE - YOU CAN'T REINITIALIZE THESE VALUES - They hold TOP information for the original array, but TOP does need to be reset to account
-		// for SHIFT in the second and 3rd array. 
-		stackInfo.topIndex1 = -1;
-		stackInfo.topIndex2 = (size / 3) - 1;
-		stackInfo.topIndex3 = ((size / 3) * 2) - 1;
+		
+		stackInfo.topIndex2 = stackInfo.topIndex2 + stackInfo.capacity / 2;
+		stackInfo.topIndex3 = stackInfo.topIndex3 + stackInfo.capacity;
+		
 	}
 }
