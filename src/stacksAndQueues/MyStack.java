@@ -46,4 +46,5 @@ public class MyStack<T> {
 	public int GetLength() {
 		return length;
 	}
+	
 }
