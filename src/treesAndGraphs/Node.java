@@ -10,5 +10,6 @@ public class Node {
     public Node(int data) {
         this.data = data;
         adjacent = new ArrayList<Node>();
+        marked = false;
     }
 }
