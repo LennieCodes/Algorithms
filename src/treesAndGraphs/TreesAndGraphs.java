@@ -35,6 +35,10 @@ public class TreesAndGraphs {
         return false;
     }
 
+    public static Node CreateMinBST(int[] arr) {
+        return null;
+    }
+
     // Breadth First Search implementation
     public void Search(Node root) {
         if (root == null) {
