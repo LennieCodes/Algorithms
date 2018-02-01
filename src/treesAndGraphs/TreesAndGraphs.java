@@ -35,8 +35,41 @@ public class TreesAndGraphs {
         return false;
     }
 
-    public static Node CreateMinBST(int[] arr) {
-        return null;
+    // 4.2
+    public static TreeNode CreateMinBST(int[] arr, TreeNode node) {
+        int middle = (int) (arr.length / 2);
+        int[] left = new int[middle];
+        int[] right = new int[middle];
+        if (node == null) {
+            node = new TreeNode(arr[middle]);
+        }
+        // copy left side into new array. 
+        for (int i = 0; i < middle; i++) {
+            left[i] = arr[i];
+        }
+        // copy right side into new array
+        int j = 0;
+        for (int i = middle + 1; i < arr.length; i++) {
+            right[j] = arr[i];
+            j++;
+        }
+
+        if (left.length > 1) {
+            node.left = CreateMinBST(left, node.left);
+        }
+
+        if (right.length > 1) {
+            node.right = CreateMinBST(right, node.right);
+        }
+
+        if (left.length == 1) {
+            node.left = new TreeNode(left[0]);
+        }
+        if (right.length == 1) {
+            node.right = new TreeNode(right[0]);
+        }
+
+        return node;
     }
 
     // Breadth First Search implementation

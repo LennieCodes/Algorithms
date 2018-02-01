@@ -55,9 +55,10 @@ public class TestRunner {
     @Test
     public void createMinBSTTest() {
         int[] initArr = new int[] {2,4,6,8,9,10,20};
+        //int[] initArr = new int[] {2,4,6};
         ArrayList<Integer> list = new ArrayList<Integer>();
 
-        Node root = TreesAndGraphs.CreateMinBST(initArr);
+        TreeNode root = TreesAndGraphs.CreateMinBST(initArr, null);
         inOrderMinBSTTraversal(root, list);
 
         int value;
@@ -82,9 +83,9 @@ public class TestRunner {
     // this will print a binary search tree in sorted, ascending order
     public void inOrderMinBSTTraversal(TreeNode node, ArrayList<Integer> list) {
         if (node != null) {
-            inOrderMinBSTTraversal(node.left);
+            inOrderMinBSTTraversal(node.left, list);
             list.add(node.data);
-            inOrderMinBSTTraversal(node.right);
+            inOrderMinBSTTraversal(node.right, list);
         }
     }
 
