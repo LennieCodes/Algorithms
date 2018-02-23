@@ -72,6 +72,35 @@ public class TreesAndGraphs {
         return node;
     }
 
+    // 4.4 - Book Assisted
+    public static boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+
+        int heightDiff = left - right;
+        if (Math.abs(heightDiff) > 1) {
+            return false;
+        }
+        else {
+            return isBalanced(root.left) && isBalanced(root.right);
+        }
+    }
+
+    public static int getHeight(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        int max = Math.max(left, right);
+
+        return max + 1;
+    }
+
     // Breadth First Search implementation
     public void Search(Node root) {
         if (root == null) {

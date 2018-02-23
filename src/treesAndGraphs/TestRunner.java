@@ -4,6 +4,8 @@ package treesAndGraphs;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import jdk.jfr.Timestamp;
+
 import java.util.ArrayList;
 
 public class TestRunner {
@@ -78,6 +80,17 @@ public class TestRunner {
             array to initarray, if they're the same, you know you got it right. 
 
         */
+    }
+
+    @Test 
+    public void isBalancedTest() {
+        TreeNode root = new TreeNode(0);
+        root.left = new TreeNode(1);
+        root.left.right = new TreeNode(2);
+
+        if (TreesAndGraphs.isBalanced(root)) {
+            fail("Tree is not balanced, but method does not detect it");
+        }
     }
 
     // this will print a binary search tree in sorted, ascending order
