@@ -101,6 +101,11 @@ public class TreesAndGraphs {
         return max + 1;
     }
 
+    // 4.5
+    public static boolean isBinarySearchTree(TreeNode root) {
+        throw new UnsupportedOperationException();
+    }
+
     // Breadth First Search implementation
     public void Search(Node root) {
         if (root == null) {
