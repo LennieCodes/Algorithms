@@ -103,7 +103,38 @@ public class TreesAndGraphs {
 
     // 4.5
     public static boolean isBinarySearchTree(TreeNode root) {
-        throw new UnsupportedOperationException();
+        boolean newMaxFound = searchForNewMax(root.left, root.data, false);
+        boolean newMinFound = searchForNewMin(root.right, root.data, false);
+
+        if (newMaxFound == true || newMinFound == true) {
+            return false;
+        }
+
+        else {
+            return isBinarySearchTree(root.left) && isBinarySearchTree(root.right);
+        }
+    }
+
+    private static boolean searchForNewMax(TreeNode node, int currentMax, boolean newMaxFound) {
+        if (node != null && newMaxFound != true) {
+            newMaxFound = searchForNewMax(node.left, currentMax, newMaxFound);
+            if (newMaxFound == true || node.data > currentMax) { return true; }
+            
+            newMaxFound = searchForNewMax(node.right, currentMax, newMaxFound);
+            if (newMaxFound == true || node.data > currentMax) { return true; }
+        }
+        return newMaxFound;
+    }
+
+    private static boolean searchForNewMin(TreeNode node, int currentMin, boolean newMinFound) {
+        if (node != null && newMinFound != true) {
+            newMinFound = searchForNewMin(node.left, currentMin, newMinFound);
+            if (newMinFound == true || node.data <= currentMin) { return true; }
+
+            newMinFound = searchForNewMin(node.right, currentMin, newMinFound);
+            if (newMinFound == true || node.data <= currentMin) { return true; }
+        }
+        return newMinFound;
     }
 
     // Breadth First Search implementation
