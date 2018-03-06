@@ -18,5 +18,6 @@ public class BinaryTree {
         else {
             parent.right = child;
         }
+        child.parent = parent;
     }
 }

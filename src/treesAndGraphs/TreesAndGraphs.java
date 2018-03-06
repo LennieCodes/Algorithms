@@ -137,6 +137,11 @@ public class TreesAndGraphs {
         return newMinFound;
     }
 
+    // 4.6
+    public static TreeNode findInOrderSuccessor(TreeNode n) {
+        throw new UnsupportedOperationException();
+    }
+
     // Breadth First Search implementation
     public void Search(Node root) {
         if (root == null) {

@@ -135,6 +135,68 @@ public class TestRunner {
 
     }
 
+    @Test 
+    public void InOrderSuccessorTest() {
+        /*
+            How to construct this test? 
+            1. Build out a tree structure 
+            2. Pass in a left leaf (function should know to look at parent)
+            3. Pass in a right leaf (function should know to look at root)
+            4. Pass in max node (function should know to look at root and return max node)
+            5. Pass in Node with right siblings. Function should know to look at left-most node in right subtree. 
+        */
+
+        BinaryTree tree = new BinaryTree(8);
+        TreeNode n1 = new TreeNode(3);
+        TreeNode n2 = new TreeNode(1);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(4);
+        TreeNode n7 = new TreeNode(10);
+        TreeNode n8 = new TreeNode(14);
+        TreeNode n9 = new TreeNode(13);
+        TreeNode result = null;
+
+        // root level
+        tree.add(tree.getRoot(), n1, "left");
+        tree.add(tree.getRoot(), n7, "right");
+        // left subtree
+        tree.add(n1, n2, "left");
+        tree.add(n1, n3, "right");
+        tree.add(n3, n4, "left");
+        tree.add(n3, n5, "right");
+        tree.add(n4, n6, "left");
+        // right subtree
+        tree.add(n7, n8, "right");
+        tree.add(n8, n9, "left");
+
+        // left leaf successor test.
+        result = TreesAndGraphs.findInOrderSuccessor(n2);
+        if (result != n1) {
+            fail("left leaf successor is:" + n1.data + " but method returned:" + result.data);
+        }
+
+        // right leaf successor test. 
+        result = TreesAndGraphs.findInOrderSuccessor(n5);
+        if (result != tree.getRoot()) {
+            fail("right leaf successor is:" + tree.getRoot() + " but method returned:" + result.data);
+        }
+
+        // max node successor
+        result = TreesAndGraphs.findInOrderSuccessor(n8);
+        if (result != n8) {
+            fail("max node successor is itself, but method did not detect it");
+        }
+
+        // mid node successor test
+        result = TreesAndGraphs.findInOrderSuccessor(n1);
+        if (result != n6) {
+            fail("mid node success is:" + n6.data + " but method returned:" + result.data);
+        }
+        
+    }
+
     // this will print a binary search tree in sorted, ascending order
     public void inOrderMinBSTTraversal(TreeNode node, ArrayList<Integer> list) {
         if (node != null) {
