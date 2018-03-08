@@ -139,7 +139,31 @@ public class TreesAndGraphs {
 
     // 4.6
     public static TreeNode findInOrderSuccessor(TreeNode n) {
-        throw new UnsupportedOperationException();
+        // left leaf
+        if (n.right == null && n.parent.data > n.data) {
+            return n.parent;
+        }
+        // right leaf
+        else if (n.right == null && n.parent.data < n.data) {
+            TreeNode root = n;
+            while (root.parent != null) {
+                root = root.parent;
+            }
+            if (root.data > n.data) {
+                return root;
+            }
+            else {
+                return n; // right leaf is max node in tree. 
+            }
+        }
+
+        TreeNode runner = n.right;
+        
+        while (runner.left != null) {
+            runner = runner.left;
+        }
+        
+        return runner; 
     }
 
     // Breadth First Search implementation

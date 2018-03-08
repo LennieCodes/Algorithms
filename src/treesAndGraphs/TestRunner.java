@@ -136,7 +136,7 @@ public class TestRunner {
     }
 
     @Test 
-    public void InOrderSuccessorTest() {
+    public void inOrderSuccessorTest() {
         /*
             How to construct this test? 
             1. Build out a tree structure 
