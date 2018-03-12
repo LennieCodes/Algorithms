@@ -7,6 +7,7 @@ import org.junit.Test;
 import jdk.jfr.Timestamp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TestRunner {
     @Test 
@@ -195,6 +196,37 @@ public class TestRunner {
             fail("mid node success is:" + n6.data + " but method returned:" + result.data);
         }
         
+    }
+
+    @Test
+    public void buildOrderTest() {
+        /*
+            How to setup this test? 
+            The method inputs an array of projects and a list of dependencies. 
+            Setup the expected output and see if method returns that output string. 
+
+            Also, you need to setup a test where no possible build order is found. Send that into 
+            the function and make sure that it reports that successfully as well.
+        */
+        String projects = "A,B,C,D,E,F";
+        HashMap<String, String[]> dependencies = new HashMap<String, String[]>();
+        dependencies.put("F", null);
+        dependencies.put("E", null);
+        dependencies.put("C", new String[] {"D"});
+        dependencies.put("D", new String[] {"A","B"});
+        dependencies.put("A", new String[] {"F"});
+        dependencies.put("B", new String[] {"F"});
+        String[] expectedOutput = new String[] {"F,A,B,D,C,E"};
+        String[] output = TreesAndGraphs.findBuildOrder(projects, dependencies);
+
+        for (int i = 0; i < expectedOutput.length; i++) {
+            if (expectedOutput[i] != output[i]) {
+                fail("Expected build order at index:" + i 
+                + " to be:" + expectedOutput[i] + "but instead output contains:" + output[i] );
+            }
+        }
+
+        // also test for no possible build order being found here.
     }
 
     // this will print a binary search tree in sorted, ascending order

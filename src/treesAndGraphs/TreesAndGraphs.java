@@ -1,5 +1,6 @@
 package treesAndGraphs;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class TreesAndGraphs {
@@ -164,6 +165,11 @@ public class TreesAndGraphs {
         }
         
         return runner; 
+    }
+
+    // 4.7 
+    public static String[] findBuildOrder(String Projects, HashMap<String, String[]> dependencies) {
+        throw new UnsupportedOperationException();
     }
 
     // Breadth First Search implementation
