@@ -208,7 +208,14 @@ public class TestRunner {
             Also, you need to setup a test where no possible build order is found. Send that into 
             the function and make sure that it reports that successfully as well.
         */
-        String projects = "A,B,C,D,E,F";
+        ArrayList<ProjectNode> projects = new ArrayList<ProjectNode>();
+        projects.add(new ProjectNode("A"));
+        projects.add(new ProjectNode("B"));
+        projects.add(new ProjectNode("C"));
+        projects.add(new ProjectNode("D"));
+        projects.add(new ProjectNode("E"));
+        projects.add(new ProjectNode("F"));
+
         HashMap<String, String[]> dependencies = new HashMap<String, String[]>();
         dependencies.put("F", null);
         dependencies.put("E", null);

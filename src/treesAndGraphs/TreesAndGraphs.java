@@ -1,5 +1,6 @@
 package treesAndGraphs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -168,8 +169,32 @@ public class TreesAndGraphs {
     }
 
     // 4.7 
-    public static String[] findBuildOrder(String Projects, HashMap<String, String[]> dependencies) {
+    public static String[] findBuildOrder(ArrayList<ProjectNode> projects, HashMap<String, String[]> dependencies) {
+
+        ArrayList<ProjectNode> mappedProjects = mapDepsToProjects(projects, dependencies);
+        
+        
         throw new UnsupportedOperationException();
+        // Assign Dependency relationship to Graph nodes. 
+
+    }
+
+    private static ArrayList<ProjectNode> mapDepsToProjects(ArrayList<ProjectNode> projects, HashMap<String, String[]> dependencies) {
+        String[] deps;
+        // Nasty
+        for (ProjectNode proj : projects) {
+            deps = dependencies.get(proj.data);
+            if (deps != null) {
+                for (int i = 0; i < deps.length; i++) {
+                    for (ProjectNode n : projects) {
+                        if (deps[i] == n.data) {
+                            proj.dependencies.add(n);
+                        }
+                    }
+                }
+            }
+        }
+        return projects;
     }
 
     // Breadth First Search implementation
