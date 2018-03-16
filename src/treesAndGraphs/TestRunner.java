@@ -223,7 +223,7 @@ public class TestRunner {
         dependencies.put("D", new String[] {"A","B"});
         dependencies.put("A", new String[] {"F"});
         dependencies.put("B", new String[] {"F"});
-        String[] expectedOutput = new String[] {"F,A,B,D,C,E"};
+        String[] expectedOutput = new String[] {"F","A","B","D","C","E"};
         String[] output = TreesAndGraphs.findBuildOrder(projects, dependencies);
 
         for (int i = 0; i < expectedOutput.length; i++) {
@@ -232,8 +232,6 @@ public class TestRunner {
                 + " to be:" + expectedOutput[i] + "but instead output contains:" + output[i] );
             }
         }
-
-        // also test for no possible build order being found here.
     }
 
     // this will print a binary search tree in sorted, ascending order

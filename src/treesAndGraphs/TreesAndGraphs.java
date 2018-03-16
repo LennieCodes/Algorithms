@@ -172,11 +172,31 @@ public class TreesAndGraphs {
     public static String[] findBuildOrder(ArrayList<ProjectNode> projects, HashMap<String, String[]> dependencies) {
 
         ArrayList<ProjectNode> mappedProjects = mapDepsToProjects(projects, dependencies);
-        
-        
-        throw new UnsupportedOperationException();
-        // Assign Dependency relationship to Graph nodes. 
+        ArrayList<String> buildOrderList = new ArrayList<String>();
+        for (ProjectNode proj : mappedProjects) {
+            if (proj.built == false) {
+                buildOrderList = buildProject(proj, buildOrderList);
+            }
+        }
 
+        String[] buildOrderArr = new String[buildOrderList.size()];
+        for (int i = 0; i < buildOrderList.size(); i++) {
+            buildOrderArr[i] = buildOrderList.get(i);
+        }
+
+        return buildOrderArr; 
+    }
+
+    private static ArrayList<String> buildProject(ProjectNode proj, ArrayList<String> buildOrderList) {
+        if (proj == null) return buildOrderList;
+        for (ProjectNode n : proj.dependencies) {
+            if (n.built == false) {
+                buildOrderList = buildProject(n, buildOrderList);
+            }
+        }
+        proj.built = true;
+        buildOrderList.add(proj.data);
+        return buildOrderList;
     }
 
     private static ArrayList<ProjectNode> mapDepsToProjects(ArrayList<ProjectNode> projects, HashMap<String, String[]> dependencies) {
