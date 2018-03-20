@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestRunner {
-    @Test 
+    @Test
     public void pathExistsTest() {
         // init
         Node root = new Node(0);
@@ -73,17 +73,17 @@ public class TestRunner {
         }
 
         /*
-            How to structure this test? 
+            How to structure this test?
             I mean you have to iterate through this tree with one of the known methods
             and see if it lines up right?
-            
+
             visit could just add the value to an array, and then you compare final
-            array to initarray, if they're the same, you know you got it right. 
+            array to initarray, if they're the same, you know you got it right.
 
         */
     }
 
-    @Test 
+    @Test
     public void isBalancedTest() {
         BinaryTree tree = new BinaryTree(0);
         TreeNode n1 = new TreeNode(1);
@@ -97,11 +97,11 @@ public class TestRunner {
         }
     }
 
-    @Test 
+    @Test
     public void isBSTTest() {
-        
+
         //  test to see if function correctly determines that tree is not BST.
-        
+
         TreeNode n1 = new TreeNode(4);
         TreeNode n2 = new TreeNode(2);
         TreeNode n3 = new TreeNode(4);
@@ -120,14 +120,14 @@ public class TestRunner {
             fail("tree1 is not a binary search tree, but method does not detect it");
         }
 
-        // test to see if function correctly determines that tree is BST 
+        // test to see if function correctly determines that tree is BST
 
         n3 = new TreeNode(6);
         BinaryTree tree2 = new BinaryTree(8);
         tree2.add(tree2.getRoot(), n1, "left");
         tree2.add(tree2.getRoot(), n4, "right");
         tree2.add(n1, n2, "left");
-        tree2.add(n1, n3, "right"); 
+        tree2.add(n1, n3, "right");
         tree2.add(n4, n5, "right");
 
         if (TreesAndGraphs.isBinarySearchTree(tree2.getRoot()) == false) {
@@ -136,15 +136,15 @@ public class TestRunner {
 
     }
 
-    @Test 
+    @Test
     public void inOrderSuccessorTest() {
         /*
-            How to construct this test? 
-            1. Build out a tree structure 
+            How to construct this test?
+            1. Build out a tree structure
             2. Pass in a left leaf (function should know to look at parent)
             3. Pass in a right leaf (function should know to look at root)
             4. Pass in max node (function should know to look at root and return max node)
-            5. Pass in Node with right siblings. Function should know to look at left-most node in right subtree. 
+            5. Pass in Node with right siblings. Function should know to look at left-most node in right subtree.
         */
 
         BinaryTree tree = new BinaryTree(8);
@@ -178,7 +178,7 @@ public class TestRunner {
             fail("left leaf successor is:" + n1.data + " but method returned:" + result.data);
         }
 
-        // right leaf successor test. 
+        // right leaf successor test.
         result = TreesAndGraphs.findInOrderSuccessor(n5);
         if (result != tree.getRoot()) {
             fail("right leaf successor is:" + tree.getRoot() + " but method returned:" + result.data);
@@ -195,17 +195,17 @@ public class TestRunner {
         if (result != n6) {
             fail("mid node success is:" + n6.data + " but method returned:" + result.data);
         }
-        
+
     }
 
     @Test
     public void buildOrderTest() {
         /*
-            How to setup this test? 
-            The method inputs an array of projects and a list of dependencies. 
-            Setup the expected output and see if method returns that output string. 
+            How to setup this test?
+            The method inputs an array of projects and a list of dependencies.
+            Setup the expected output and see if method returns that output string.
 
-            Also, you need to setup a test where no possible build order is found. Send that into 
+            Also, you need to setup a test where no possible build order is found. Send that into
             the function and make sure that it reports that successfully as well.
         */
         ArrayList<ProjectNode> projects = new ArrayList<ProjectNode>();
@@ -228,9 +228,44 @@ public class TestRunner {
 
         for (int i = 0; i < expectedOutput.length; i++) {
             if (expectedOutput[i] != output[i]) {
-                fail("Expected build order at index:" + i 
+                fail("Expected build order at index:" + i
                 + " to be:" + expectedOutput[i] + "but instead output contains:" + output[i] );
             }
+        }
+    }
+
+    @Test
+    public void firstCommonAncestorTest() {
+        BinaryTree tree = new BinaryTree(8);
+        TreeNode n1 = new TreeNode(3);
+        TreeNode n2 = new TreeNode(1);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(4);
+        TreeNode n7 = new TreeNode(10);
+        TreeNode n8 = new TreeNode(14);
+        TreeNode n9 = new TreeNode(13);
+        TreeNode result = null;
+
+
+        // root level
+        tree.add(tree.getRoot(), n1, "left");
+        tree.add(tree.getRoot(), n7, "right");
+        // left subtree
+        tree.add(n1, n2, "left");
+        tree.add(n1, n3, "right");
+        tree.add(n3, n4, "left");
+        tree.add(n3, n5, "right");
+        tree.add(n4, n6, "left");
+        // right subtree
+        tree.add(n7, n8, "right");
+        tree.add(n8, n9, "left");
+
+        result = TreesAndGraphs.findFirstCommonAncestor(n3, n8);
+
+        if (result == null || result != tree.getRoot()) {
+            fail("Expected: " + tree.getRoot().data + " but retrieved: " + result.data);
         }
     }
 

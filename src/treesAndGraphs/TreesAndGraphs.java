@@ -45,7 +45,7 @@ public class TreesAndGraphs {
         if (node == null) {
             node = new TreeNode(arr[middle]);
         }
-        // copy left side into new array. 
+        // copy left side into new array.
         for (int i = 0; i < middle; i++) {
             left[i] = arr[i];
         }
@@ -79,7 +79,7 @@ public class TreesAndGraphs {
         if (root == null) {
             return true;
         }
-        
+
         int left = getHeight(root.left);
         int right = getHeight(root.right);
 
@@ -108,7 +108,7 @@ public class TreesAndGraphs {
         if (root == null) {
             return true;
         }
-        
+
         boolean newMaxFound = searchForNewMax(root.left, root.data, false);
         boolean newMinFound = searchForNewMin(root.right, root.data, false);
 
@@ -123,7 +123,7 @@ public class TreesAndGraphs {
 
     private static boolean searchForNewMax(TreeNode node, int currentMax, boolean newMaxFound) {
         if (node != null && newMaxFound != true) {
-            newMaxFound = (searchForNewMax(node.left, currentMax, newMaxFound) 
+            newMaxFound = (searchForNewMax(node.left, currentMax, newMaxFound)
                 || searchForNewMax(node.right, currentMax, newMaxFound));
             if (newMaxFound == true || node.data > currentMax) { return true; }
         }
@@ -155,20 +155,20 @@ public class TreesAndGraphs {
                 return root;
             }
             else {
-                return n; // right leaf is max node in tree. 
+                return n; // right leaf is max node in tree.
             }
         }
 
         TreeNode runner = n.right;
-        
+
         while (runner.left != null) {
             runner = runner.left;
         }
-        
-        return runner; 
+
+        return runner;
     }
 
-    // 4.7 
+    // 4.7
     public static String[] findBuildOrder(ArrayList<ProjectNode> projects, HashMap<String, String[]> dependencies) {
 
         ArrayList<ProjectNode> mappedProjects = mapDepsToProjects(projects, dependencies);
@@ -184,7 +184,7 @@ public class TreesAndGraphs {
             buildOrderArr[i] = buildOrderList.get(i);
         }
 
-        return buildOrderArr; 
+        return buildOrderArr;
     }
 
     private static ArrayList<String> buildProject(ProjectNode proj, ArrayList<String> buildOrderList) {
@@ -215,6 +215,11 @@ public class TreesAndGraphs {
             }
         }
         return projects;
+    }
+
+    // 4.8
+    public static TreeNode findFirstCommonAncestor(TreeNode p, TreeNode q) {
+        throw new UnImplementedMethodException();
     }
 
     // Breadth First Search implementation
