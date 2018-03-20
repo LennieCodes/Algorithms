@@ -219,7 +219,23 @@ public class TreesAndGraphs {
 
     // 4.8
     public static TreeNode findFirstCommonAncestor(TreeNode p, TreeNode q) {
-        throw new UnImplementedMethodException();
+        if (p == null || q == null) {
+            return null;
+        }
+        TreeNode pRunner;
+
+        while (q.parent != null) {
+            pRunner = p;
+            while (pRunner.parent != null && pRunner.parent != q.parent) {
+                pRunner = pRunner.parent;
+            }
+            if (pRunner.parent == q.parent) {
+                return q.parent;
+            }
+            q = q.parent;
+        }
+
+        return null;
     }
 
     // Breadth First Search implementation
