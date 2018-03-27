@@ -295,6 +295,9 @@ public class TestRunner {
         tree.add(n1, n2, "left");
 
         ArrayList<LinkedList<Integer>> sequenceLists = TreesAndGraphs.bstSequences(tree.getRoot());
+        for (LinkedList<Integer> list : sequenceLists) {
+            list.addFirst(head);
+        }
 
         for (int i = 0; i < testSequenceLists.size(); i++) {
             LinkedList<Integer> testList = testSequenceLists.get(i);

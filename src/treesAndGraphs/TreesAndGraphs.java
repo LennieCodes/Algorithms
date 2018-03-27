@@ -240,8 +240,8 @@ public class TreesAndGraphs {
 
     // 4.9
     public static ArrayList<LinkedList<Integer>> bstSequences(TreeNode root) {
-        ArrayList<Integer> left = getNodes(root.left);
-        ArrayList<Integer> right = getNodes(root.right);
+        ArrayList<Integer> left = gatherNodes(root.left, null);
+        ArrayList<Integer> right = gatherNodes(root.right, null);
         // combine
         left.addAll(right);
         
@@ -252,6 +252,18 @@ public class TreesAndGraphs {
         }
 
         return Permutations.permute(initArr);
+    }
+
+    private static ArrayList<Integer> gatherNodes(TreeNode node, ArrayList<Integer> list) {
+        if (list == null) {
+            list = new ArrayList<Integer>();
+        }
+        if (node != null) {
+            list = gatherNodes(node.left, list);
+            list.add(node.data);
+            list = gatherNodes(node.right, list);
+        }
+        return list;
     }
 
     // Breadth First Search implementation
