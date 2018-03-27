@@ -8,6 +8,7 @@ import jdk.jfr.Timestamp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class TestRunner {
     @Test
@@ -266,6 +267,44 @@ public class TestRunner {
 
         if (result == null || result != tree.getRoot()) {
             fail("Expected: " + tree.getRoot().data + " but retrieved: " + result.data);
+        }
+    }
+
+    @Test 
+    public void bstSequencesTest() {
+        /* 
+            1. Call permutations on an array of 3 elements, then prepend the "head" to every result of that operation.
+            2. Call BSTSequences() passing in head. The result will be an array of elements. 
+            3. Check to see if that array is equal. If it isn't fail. 
+        */ 
+        int head = 3;
+        int[] initArr = new int[] {1,2,4};
+
+        ArrayList<LinkedList<Integer>> testSequenceLists = Permutations.permute(initArr);
+        for (LinkedList<Integer> list : testSequenceLists) {
+            list.addFirst(head);
+        }
+
+        // create tree to pass into test
+        BinaryTree tree = new BinaryTree(head);
+        TreeNode n1 = new TreeNode(2);
+        TreeNode n2 = new TreeNode(1);
+        TreeNode n3 = new TreeNode(4);
+        tree.add(tree.getRoot(), n1, "left");
+        tree.add(tree.getRoot(), n3, "right");
+        tree.add(n1, n2, "left");
+
+        ArrayList<LinkedList<Integer>> sequenceLists = TreesAndGraphs.bstSequences(tree.getRoot());
+
+        for (int i = 0; i < testSequenceLists.size(); i++) {
+            LinkedList<Integer> testList = testSequenceLists.get(i);
+            LinkedList<Integer> resultList = sequenceLists.get(i);
+
+            for (int j = 0; j < testList.size(); j++) {
+                if (testList.get(j) != resultList.get(j)) {
+                    fail("Sequence lists do not match.");
+                }
+            }
         }
     }
 

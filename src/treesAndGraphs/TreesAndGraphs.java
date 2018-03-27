@@ -238,6 +238,22 @@ public class TreesAndGraphs {
         return null;
     }
 
+    // 4.9
+    public static ArrayList<LinkedList<Integer>> bstSequences(TreeNode root) {
+        ArrayList<Integer> left = getNodes(root.left);
+        ArrayList<Integer> right = getNodes(root.right);
+        // combine
+        left.addAll(right);
+        
+        int[] initArr = new int[left.size()];
+
+        for (int i = 0; i < left.size(); i++) {
+            initArr[i] = (int) left.get(i);
+        }
+
+        return Permutations.permute(initArr);
+    }
+
     // Breadth First Search implementation
     public void Search(Node root) {
         if (root == null) {
