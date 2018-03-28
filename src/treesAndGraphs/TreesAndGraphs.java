@@ -254,6 +254,11 @@ public class TreesAndGraphs {
         return Permutations.permute(initArr);
     }
 
+    // 4.10
+    public static boolean checkSubtree(TreeNode n1, TreeNode n2) {
+        throw new UnsupportedOperationException();
+    }
+
     private static ArrayList<Integer> gatherNodes(TreeNode node, ArrayList<Integer> list) {
         if (list == null) {
             list = new ArrayList<Integer>();

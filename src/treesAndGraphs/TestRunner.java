@@ -311,6 +311,54 @@ public class TestRunner {
         }
     }
 
+    @Test
+    public void checkSubtreeTest() {
+        BinaryTree tree = new BinaryTree(8);
+        BinaryTree tree2 = new BinaryTree(10);
+        BinaryTree tree3 = new BinaryTree(10);
+        TreeNode n1 = new TreeNode(3);
+        TreeNode n2 = new TreeNode(1);
+        TreeNode n3 = new TreeNode(6);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(7);
+        TreeNode n6 = new TreeNode(4);
+        TreeNode n7 = new TreeNode(10);
+        TreeNode n8 = new TreeNode(14);
+        TreeNode n9 = new TreeNode(13);
+
+
+
+        // root level - tree 1
+        tree.add(tree.getRoot(), n1, "left");
+        tree.add(tree.getRoot(), n7, "right");
+        // left subtree
+        tree.add(n1, n2, "left");
+        tree.add(n1, n3, "right");
+        tree.add(n3, n4, "left");
+        tree.add(n3, n5, "right");
+        tree.add(n4, n6, "left");
+        // right subtree
+        tree.add(n7, n8, "right");
+        tree.add(n8, n9, "left");
+
+        // tree 2
+        tree2.add(tree2.getRoot(), n8, "right");
+        tree2.add(n8, n9, "left");
+
+        // tree 3 - same nodes but structurally different from tree 2. 
+        tree3.add(tree2.getRoot(), n8, "left");
+        tree3.add(n8, n9, "right");
+
+        if (TreesAndGraphs.checkSubtree(tree.getRoot(), tree2.getRoot()) == false) {
+            fail("Tree 2 is a subtree of Tree 1, but method does not detect it");
+        }
+
+        if (TreesAndGraphs.checkSubtree(tree.getRoot(), tree3.getRoot()) == true) {
+            fail("Tree 3 is not a subtree of Tree 1, but method does not detect it");
+        }
+
+    }
+
     // this will print a binary search tree in sorted, ascending order
     public void inOrderMinBSTTraversal(TreeNode node, ArrayList<Integer> list) {
         if (node != null) {
