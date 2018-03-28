@@ -326,7 +326,13 @@ public class TestRunner {
         TreeNode n8 = new TreeNode(14);
         TreeNode n9 = new TreeNode(13);
 
+        // Nodes for Tree 2. 
+        TreeNode s1 = new TreeNode(14);
+        TreeNode s2 = new TreeNode(13);
 
+        // Nodes for Tree 3.
+        TreeNode t1 = new TreeNode(14);
+        TreeNode t2 = new TreeNode(13);
 
         // root level - tree 1
         tree.add(tree.getRoot(), n1, "left");
@@ -342,12 +348,12 @@ public class TestRunner {
         tree.add(n8, n9, "left");
 
         // tree 2
-        tree2.add(tree2.getRoot(), n8, "right");
-        tree2.add(n8, n9, "left");
+        tree2.add(tree2.getRoot(), s1, "right");
+        tree2.add(s1, s2, "left");
 
         // tree 3 - same nodes but structurally different from tree 2. 
-        tree3.add(tree2.getRoot(), n8, "left");
-        tree3.add(n8, n9, "right");
+        tree3.add(tree3.getRoot(), t1, "left");
+        tree3.add(t1, t2, "right");
 
         if (TreesAndGraphs.checkSubtree(tree.getRoot(), tree2.getRoot()) == false) {
             fail("Tree 2 is a subtree of Tree 1, but method does not detect it");

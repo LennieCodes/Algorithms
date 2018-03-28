@@ -256,8 +256,27 @@ public class TreesAndGraphs {
 
     // 4.10
     public static boolean checkSubtree(TreeNode n1, TreeNode n2) {
-        throw new UnsupportedOperationException();
+        
+        String s1 = gatherNodesPreorder(n1, new StringBuilder()).toString();
+        String s2 = gatherNodesPreorder(n2, new StringBuilder()).toString();
+
+        return s1.contains(s2);
     }
+
+    private static StringBuilder gatherNodesPreorder(TreeNode node, StringBuilder nodeString) {
+        if (node != null) {
+            nodeString.append(node.data);
+            nodeString = gatherNodesPreorder(node.left, nodeString);
+            nodeString = gatherNodesPreorder(node.right, nodeString);
+        }
+        else {
+            nodeString.append("x");
+        }
+        
+        return nodeString; 
+    } 
+
+
 
     private static ArrayList<Integer> gatherNodes(TreeNode node, ArrayList<Integer> list) {
         if (list == null) {
