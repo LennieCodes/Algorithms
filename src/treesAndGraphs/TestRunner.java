@@ -270,13 +270,13 @@ public class TestRunner {
         }
     }
 
-    @Test 
+    @Test
     public void bstSequencesTest() {
-        /* 
+        /*
             1. Call permutations on an array of 3 elements, then prepend the "head" to every result of that operation.
-            2. Call BSTSequences() passing in head. The result will be an array of elements. 
-            3. Check to see if that array is equal. If it isn't fail. 
-        */ 
+            2. Call BSTSequences() passing in head. The result will be an array of elements.
+            3. Check to see if that array is equal. If it isn't fail.
+        */
         int head = 3;
         int[] initArr = new int[] {1,2,4};
 
@@ -326,7 +326,7 @@ public class TestRunner {
         TreeNode n8 = new TreeNode(14);
         TreeNode n9 = new TreeNode(13);
 
-        // Nodes for Tree 2. 
+        // Nodes for Tree 2.
         TreeNode s1 = new TreeNode(14);
         TreeNode s2 = new TreeNode(13);
 
@@ -351,7 +351,7 @@ public class TestRunner {
         tree2.add(tree2.getRoot(), s1, "right");
         tree2.add(s1, s2, "left");
 
-        // tree 3 - same nodes but structurally different from tree 2. 
+        // tree 3 - same nodes but structurally different from tree 2.
         tree3.add(tree3.getRoot(), t1, "left");
         tree3.add(t1, t2, "right");
 
@@ -363,6 +363,32 @@ public class TestRunner {
             fail("Tree 3 is not a subtree of Tree 1, but method does not detect it");
         }
 
+    }
+
+    @Test
+    public void randomNodeTest() {
+        /*
+            How to create this test?
+            1. Fill an array with random elements.
+            2. Populate the tree with these elements.
+            3. Get a random node from the tree. Check to see if that node exists in the initArray.
+        */
+        int[] initArr = new int[] {20, 10, 30, 5, 15, 3, 7, 17, 35};
+        RandomTreeNode root = new RandomTreeNode(initArr[0]);
+        for (int i = 1; i < initArr.length; i++) {
+            root.insertInOrder(initArr[i]);
+        }
+
+        RandomTreeNode randomNode = root.getRandomNode();
+        if (randomNode == null) {
+            fail("Expected random node, but retrieved null from getRandomNode() call.");
+        }
+        for (int i = 0; i < initArr.length; i++) {
+            if (initArr[i] == randomNode.data()) {
+                return;
+            }
+        }
+        fail("InitArr does not contain data returned by getRandomNode() call");
     }
 
     // this will print a binary search tree in sorted, ascending order
