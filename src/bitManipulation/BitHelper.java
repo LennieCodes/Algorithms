@@ -53,7 +53,16 @@ public class BitHelper {
         int mask = (1 << i) - 1;
         return num & mask;
     }
+    /*
+        To clear all bits from I (inclusive) to 0: If num is 
+        11011111, if i is 4, and you want to inclusively clear i to 0,
+        your mask should look like 11100000. When you apply an 
+        AND to this, it will clear bits i (inclusive) to 0. 
 
+        clearBitsIThrough0 shifts a sequence of 1s (which is -1), i + 1 
+        bits to the left. This creates a mask that looks like: 11100000. 
+        Applying an AND to this mask, will clear bits I through 0.
+    */
     public static int clearBitsIthrough0(int num, int i) {
         int mask = (-1 << (i + 1));
         return num & mask;
