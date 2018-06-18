@@ -7,7 +7,7 @@ public class TestRunner {
     @Test
     public void InsertionTest() {
         int n = 1024;
-        int m = 10011; 
+        int m = 19; 
         int i = 2;
         int j = 6;
 
