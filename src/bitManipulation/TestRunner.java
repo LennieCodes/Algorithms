@@ -17,4 +17,14 @@ public class TestRunner {
             fail("Bit Insertion did not produce expected value of 1100, or 10001001100");
         }
     }
+    
+    @Test 
+    public void BinaryToStringTest() {
+    	double val = .375;
+    	String result = BitManipulation.BinaryToString(val);
+    	
+    	if (!result.equals(".011")) {
+    		fail("Expected: .011 but method returned:" + result);
+    	}
+    }
 }

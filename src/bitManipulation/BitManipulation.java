@@ -17,5 +17,22 @@ public class BitManipulation {
 
         return n;
     }
+    
+    // 5.2
+    public static String BinaryToString(double num) {
+    	StringBuilder result = new StringBuilder(".");
+    	do {
+    		num = num * 2;
+    		System.out.println(num);
+    		if (num > 0 && num < 1) {
+    			result.append("0");
+    		} else {
+    			result.append("1");
+    			num = num - 1;
+    		}
+    	} while (num != 0 && result.length() <= 32);
+    	
+    	return result.length() <= 32 ? result.toString() : "Error";
+    }
 
 }
