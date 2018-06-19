@@ -27,4 +27,14 @@ public class TestRunner {
     		fail("Expected: .011 but method returned:" + result);
     	}
     }
+    
+    @Test
+    public void FlipBitToWinTest() {
+    	int num = 1775;
+    	int result = BitManipulation.FlipBitToWin(num);
+    	
+    	if (result != 8) {
+    		fail("The bit representation of 1775 can have a sequence of 8 1s, but method returned:" + result);
+    	}
+    }
 }
