@@ -30,7 +30,7 @@ public class TestRunner {
     
     @Test
     public void FlipBitToWinTest() {
-    	int num = 1775;
+    	int num = 1775; // 11011101111
     	int result = BitManipulation.FlipBitToWin(num);
     	
     	if (result != 8) {

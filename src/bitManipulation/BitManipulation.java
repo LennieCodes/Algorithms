@@ -35,33 +35,32 @@ public class BitManipulation {
     
     // 5.3
     public static int FlipBitToWin(int num) {
-    	/* 
-    	 * How do you tackle this problem? 
-    	 * 
-    	 * 
-    	 * 
-    	 */
     	ArrayList<Integer> sequenceList = CreateSequences(num);
     	return FindLongestSequence(sequenceList);
     }
     
     private static ArrayList<Integer> CreateSequences(int num) {
     	/*
-    	 * The plan: Iterate through every bit, counting the bit changes. 
+    	 * We need for the sequence to always start with a 0. Look for 0. If first value is not equal to 0,
+    	 * then add counter to arraylist (will be 0). Then flip it to a 1. Now it's going to count 1s.
+    	 * This code *should* get you the sequence you're looking for.   
     	 */
-    	// 11011101111
+    	
     	ArrayList<Integer> sequenceList = new ArrayList<Integer>();
     	int counter = 0;
     	int lookingFor = 0;
     	
     	for (int i = 0; i < Integer.BYTES * 8; i++) {
-    		if ((num & 1) == lookingFor) {
+    		if ((num & 1) != lookingFor) {
+    			System.out.println("Adding: " + counter + " to Sequence List");
     			sequenceList.add(counter);
     			lookingFor = num & 1;
-    			counter = 0;
+    			counter = 1;
+    		}
+    		else {
+    			counter++;
     		}
     		
-    		counter++;
     		num = num >>> 1;
     	}
     	
@@ -70,11 +69,37 @@ public class BitManipulation {
     }
     
     private static int FindLongestSequence(ArrayList<Integer> sequenceList) {
-    	for (int i = 0; i < sequenceList.size(); i++) {
-    		System.out.println((Integer) sequenceList.indexOf(i));
+    	// 11011101111 -> [0, 4, 1, 3, 1, 2]
+    	// 100 -> [2, 1] -> max = 2. 
+    	int max = 0;
+    	int candidate = 0;
+    	if ( sequenceList.get(0) > 0) {
+    		max = 1 + sequenceList.get(1);
     	}
-    	
-    	throw new UnsupportedOperationException();
+    	for (int i = 1; i < sequenceList.size(); i++) {
+    		// looking at an index that represents 0
+    		if (i % 2 == 0) { 
+    			if (sequenceList.get(i) == 1 && i + 1 < sequenceList.size()) {
+    				candidate = sequenceList.get(i - 1) + 1 + sequenceList.get(i + 1);
+    				if (candidate > max) {
+    					max = candidate;
+    				}
+    			} 
+    			else if (i + 1 < sequenceList.size()) {
+    				candidate = Math.max(sequenceList.indexOf(i - 1) + 1, sequenceList.indexOf(i + 1) + 1);
+    				if (candidate > max) {
+    					max = candidate;
+    				}
+    			}
+    			else {
+    				candidate = sequenceList.indexOf(i - 1) + 1;
+    				if (candidate > max) {
+    					max = candidate;
+    				}
+    			}
+    		}
+    	}
+    	return max;
     }
     
     
