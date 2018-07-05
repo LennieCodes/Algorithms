@@ -37,4 +37,14 @@ public class TestRunner {
     		fail("The bit representation of 1775 can have a sequence of 8 1s, but method returned:" + result);
     	}
     }
+    
+    @Test
+    public void DebuggerTest() {
+    	int num = 14;
+    	boolean result = BitManipulation.Debugger(num);
+    	
+    	if (result == true) {
+    		fail("You failed to understand what the code does");
+    	}
+    }
 }

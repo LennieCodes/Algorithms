@@ -102,6 +102,28 @@ public class BitManipulation {
     	return max;
     }
     
+    // 5.5
+    /*
+     * Suppose this method takes 14 (1110).
+     * It subtracts 1 from it. To subtract 1, you need to flip all the bits and then add 1.
+     * So 0001 -> 1110 -> 1111. 
+     * 
+     * Then you and 1111 with 1110 which gives you 1111. Then you check if this value is equal to 0. 
+     * 
+     * Supposedly this checks to see if n is a power of 2. 
+     * 
+     * Another example where this is visible is if you take 32 (a power of 2).
+     * 
+     * 32 = 100000 -> -1 = 011111 (applying the algorithm above). If you AND these values, you get 0 (which proves that 32 is a power of 2)
+     * 
+     * This is based off the simple observation that in Binary, powers of 2 have only 1 bit set to 1. Therefore, n - 1 flips all the bits. Anding
+     * this will equal 0. 
+     */
+    public static boolean Debugger(int n) {
+    	return ((n & (n-1)) == 0);
+    }
+    
+    
     
 
 }
