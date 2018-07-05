@@ -47,4 +47,16 @@ public class TestRunner {
     		fail("You failed to understand what the code does");
     	}
     }
+    
+    @Test
+    public void ConversionTest() {
+    	int a = 29;
+    	int b = 15;
+    	
+    	int result = BitManipulation.Conversion(a, b);
+    	
+    	if (result != 2) {
+    		fail("Expected number of bits necessary for conversion to equal 2, but conversion returned:" + result);
+    	}
+    }
 }

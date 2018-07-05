@@ -52,7 +52,6 @@ public class BitManipulation {
     	
     	for (int i = 0; i < Integer.BYTES * 8; i++) {
     		if ((num & 1) != lookingFor) {
-    			System.out.println("Adding: " + counter + " to Sequence List");
     			sequenceList.add(counter);
     			lookingFor = num & 1;
     			counter = 1;
@@ -121,6 +120,24 @@ public class BitManipulation {
      */
     public static boolean Debugger(int n) {
     	return ((n & (n-1)) == 0);
+    }
+    
+    // 5.6
+    public static int Conversion(int a, int b) {
+    	int counter = 0;
+    	boolean bitA; 
+    	boolean bitB;
+    	for (int i = 0; i < Integer.BYTES * 8; i++) {
+    		bitA = BitHelper.getBit(a, i);
+    		bitB = BitHelper.getBit(b, i);
+    		
+    		if (bitA ^ bitB == true) {
+    			counter++;
+    		}
+    	}
+    	
+    	return counter;
+    	
     }
     
     
