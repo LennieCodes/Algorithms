@@ -59,4 +59,16 @@ public class TestRunner {
     		fail("Expected number of bits necessary for conversion to equal 2, but conversion returned:" + result);
     	}
     }
+    
+    @Test
+    public void PairwiseSwapTest() {
+    	int num = 115;
+    	int bitSwapped = 179;
+    	
+    	int result = BitManipulation.PairwiseSwap(num);
+    	
+    	if (result != bitSwapped) {
+    		fail("Expected result to equal:" + bitSwapped + " but method returned:" + result);
+    	}
+    }
 }

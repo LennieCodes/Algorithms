@@ -140,6 +140,13 @@ public class BitManipulation {
     	
     }
     
+    // 5.7 - book assisted
+    public static int PairwiseSwap(int num) {
+    	int oddMask = 0xaaaaaaaa;
+    	int evenMask = 0x55555555;
+    	return (( num & oddMask) >>> 1) | ((num & evenMask) << 1);
+    }
+    
     
     
 
