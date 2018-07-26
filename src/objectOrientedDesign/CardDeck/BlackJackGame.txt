@@ -1,0 +1,30 @@
+How to subclass CardDeck to implement BlackJack. I will just explain to the point of card management. 
+
+Objects you need: Dealer, Player, GameInstance, Round 
+
+Dealer has following props: Bet, ArrayList<Card> Hand
+Player also has Bet, ArrayList<Card> Hand.
+GameInstance is the over-arching instance of the game.
+Round is the current round (used to calculate bets / payoff). Contains ArrayList of players, dealer object.  
+
+The last subject I want to talk about is gameplay. At some point you will need to calculate
+player hand worth. You will have to look at the cards in each player's hand. 2 to 10 = face value. 
+J, Q, K = 10 value. An Ace is equal to a 1 or 10 depending on what the other cards are, therefore it should be 
+processed last. 
+
+When hand worth is being calculated, you iterate through a player hand. If an ace is found but array is not fully
+iterated, set flag saying you saw an ace. Continue adding up the total of a player hand. 
+
+At the end of the iteration - you check to see if an Ace has been seen. If the total of a player's hand + 11 is <= 21
+with ace included, then ace value is an 11. If total of player's hand + 11 is > 21, then ace value is 1. 
+
+So basically if an ace is seen, you set a flag saying Ace was seen. Continue iterating through the hand. Once all
+cards have been iterated through in a player hand, you apply the Ace multiplier. Also if a player's hand is greater
+than 21 before the iteration finishes, you bust the player. 
+
+   
+
+
+
+
+ 
