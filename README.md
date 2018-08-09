@@ -6,4 +6,5 @@
 * Chapter 4 (11/12)
 * Chapter 5 (6/8)
 * Chapter 6 (0/10)
+* Chapter 7 (4/12)
 
