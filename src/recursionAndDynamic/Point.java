@@ -1,0 +1,18 @@
+package recursionAndDynamic;
+
+public class Point {
+	public int row, column; 
+	public Point(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if ((o instanceof Point) && (((Point) o).row == this.row) && (((Point) o).column == this.column)) {
+            return true;
+        } else {
+            return false;
+        }
+	}
+}
